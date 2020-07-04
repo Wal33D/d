@@ -1,11 +1,3 @@
-module.exports = {
-    init: async function() {
-        await init().then(data => onOffButtonInit(data));
-         $('#tuyaDevLoading').hide();
-        $('#tuyaDevices').fadeIn();
-    }
-}
-
 const fs = require('fs');
 const CloudTuya = require('../apis_js/tuya/cloudtuya');
 const Light = require('../apis_js/tuya/light');
@@ -91,6 +83,7 @@ function createElement(device, token, api) {
             state = "true"
         }
     });
+    return table;
 }
 
 async function init() {
@@ -100,4 +93,25 @@ async function init() {
         sort(a, b);
     });
     return [devices, tokens, api];
+}
+
+module.exports = {
+    init: async function() {
+        await init().then(data => onOffButtonInit(data));
+        $('#tuyaDevLoading').hide();
+        $('#tuyaDevices').fadeIn();
+    },
+    updateStatus: async function() {
+        const token = await api.login();
+        let devices = await api.find();
+        devices.sort(function(a, b) {
+            sort(a, b);
+        });
+        var table = document.getElementById("tuyaDevices");
+        for (var i = table.rows.length-1; i > -1; i--) {
+            table.deleteRow(i);
+        }
+       devices.forEach(element => createElement(element, token, api))
+    }
+
 }

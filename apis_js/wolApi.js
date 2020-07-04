@@ -1,12 +1,3 @@
-//Save these commans as functions in a file with modules and set up event handles linked to buttons on a config page to write preferences to a file and then at start require that file and reference those variablers and if none just run defaults 
-//   runCmd("./savedata/WakeMeOnLan.exe /scan");
-//     runCmd("./savedata/WakeMeOnLan.exe /scomma ./savedata/woldevices.csv");
-
-//Waleed integerate net adapter and broadcast and ip range options eventually
-//https://www.nirsoft.net/utils/wake_on_lan.html
-
-
-
 const {
     runCmd,
     textTruncate
@@ -19,7 +10,6 @@ module.exports = {
             if (fs.existsSync(path)) {
                 $('#pcDevLoading').hide();
                 await init().then($('#pcDevices').fadeIn() && $('#pcDevLoading').hide());
-
             } else {
                 // show waiting
                 $('#pcDevLoading').fadeIn();
@@ -29,18 +19,87 @@ module.exports = {
                     $('#pcDevLoading').hide();
                     $('#pcDevices').fadeIn();
                 }, 10000);
-
             }
-        } catch (err) {
-            alert("no file")
+        } catch (err) {}
+        //ask wol to produce csv file containing current status 
+        scanToCSV();
+    },
+    updateStatus: async function() {
+        const fs = require('fs')
+        const path = './savedata/status.csv'
+        var devices = [];
+        var fc = "";
+        var ip = "";
+        var name = "";
+        var mac = "";
+        var status = "";
+        scanToCSV();
+        fc = (fs.readFileSync('./savedata/status.csv').toString().split('\n'));
+        fc.shift();
+        var table = document.getElementById("pcDevices");
+        for (var i = table.rows.length - 1; i > -1; i--) {
+            table.deleteRow(i);
         }
+        try {
+            for (i in fc) {
+                ip = fc[i].split(',')[0]
+                name = fc[i].split(',')[1]
+                mac = fc[i].split(',')[2]
+                if (fc[i].split(',')[5].match("Off") || fc[i].split(',')[5].match("On")) {
+                    status = fc[i].split(',')[5];
+                } else {
+                    status = fc[i].split(',')[6];
+                }
+                devices.push(new wolDevice(name, ip, mac, status));
+            }
+        } catch (e) {}
+
+        realSetDevices(devices);
     }
 }
+
 class wolDevice {
-    constructor(name, ip, mac) {
-        this.name = name;
+    constructor(name, ip, mac, status) {
+        this.name = name || "N/A";
         this.ip = ip;
         this.mac = mac;
+        this.status = status || "null"
+    }
+}
+
+
+async function realSetDevices(devices) {
+
+    devices.sort((a, b) => {
+        const num1 = Number(a.ip.split(".").map((num) => (`000${num}`).slice(-3)).join(""));
+        const num2 = Number(b.ip.split(".").map((num) => (`000${num}`).slice(-3)).join(""));
+        return num1 - num2;
+    });
+    for (i in devices) {
+        var wDevice = devices[i];
+        //if device has no name lets assume for now its not relevant to the pc wol pane
+        if (wDevice.name == "N/A") {
+            continue;
+        }
+        var table = document.getElementById("pcDevices");
+        var tr = document.createElement("tr");
+        var pc_name = document.createElement("td");
+        var pc_ip = document.createElement("td");
+        var state = document.createElement("td");
+
+        tr.appendChild(pc_name);
+        tr.appendChild(pc_ip);
+        tr.appendChild(state);
+        table.appendChild(tr);
+
+        pc_name.appendChild(document.createTextNode(textTruncate(wDevice.name)));
+        //  pc_ip.appendChild(document.createTextNode(wDevice.ip));
+        state.appendChild(document.createTextNode(wDevice.status));
+
+          if(wDevice.status=="null"){state.innerHTML = '<img src=' + "./assets/null.png" + '></img>' }
+               if(wDevice.status=="Off"){ state.innerHTML = '<img src=' + "./assets/Off.png" + '></img>'} 
+          if(wDevice.status=="On"){ state.innerHTML = '<img src=' + "./assets/On.png" + '></img>'}
+
     }
 }
 
@@ -58,7 +117,6 @@ function getWolDevices(array) {
 }
 
 async function scanNetwork() {
-
     var child = require('child_process').execFile;
     var executablePath = "./savedata/WakeMeOnLan.exe";
     var parameters = ["/scan"];
@@ -67,6 +125,10 @@ async function scanNetwork() {
         console.log(err)
         console.log(data.toString());
     });
+}
+
+async function scanToCSV() {
+    runCmd("./savedata/WakeMeOnLan.exe /scan /scomma ./savedata/status.csv");
 }
 
 async function wakeUpAll() {
@@ -78,8 +140,7 @@ function onOffButtonInit() {
     document.getElementById("pcOnAll").addEventListener("click", e => {
         wakeUpAll();
     });
-    document.getElementById("pcOffAll").addEventListener("click", e => {
-    });
+    document.getElementById("pcOffAll").addEventListener("click", e => {});
 }
 
 async function init() {
@@ -135,10 +196,10 @@ async function setDevices() {
         tr.appendChild(state);
         table.appendChild(tr);
 
-        pc_name.appendChild(document.createTextNode(textTruncate(wDevice.name, 11)));
-      //  pc_ip.appendChild(document.createTextNode(wDevice.ip));
- state.appendChild(document.createTextNode("on"));
- state.innerHTML= '<img src=' + "./assets/null.png" + '></img>';
+        pc_name.appendChild(document.createTextNode(textTruncate(wDevice.name)));
+        //  pc_ip.appendChild(document.createTextNode(wDevice.ip));
+        state.appendChild(document.createTextNode("on"));
+        state.innerHTML = '<img src=' + "./assets/null.png" + '></img>';
     }
 
 }

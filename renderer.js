@@ -10,8 +10,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const minimizeButton = document.getElementById("minimize-btn");
     const maxUnmaxButton = document.getElementById("max-unmax-btn");
     const closeButton = document.getElementById("close-btn");
-    tuyaApi.init();
-    wolApi.init();
+  
     menuButton.addEventListener("click", e => {
         window.openMenu(e.x, e.y);
     });
@@ -36,6 +35,11 @@ window.addEventListener("DOMContentLoaded", () => {
         window.closeWindow();
     });
 
+   tuyaApi.init();
+   wolApi.init();
 
+
+setInterval(function(){tuyaApi.updateStatus(); }, 15000);
+setInterval(function(){wolApi.updateStatus(); }, 2000);
 
 });
