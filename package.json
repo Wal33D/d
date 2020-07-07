@@ -32,10 +32,12 @@
     "electron-builder": "^22.7.0"
   },
   "dependencies": {
+    "bootstrap": "^4.5.0",
     "electron-builder-squirrel-windows": "^22.7.0",
     "electron-packager": "^15.0.0",
     "jquery": "^3.5.1",
     "node-run-cmd": "^1.0.1",
+    "popper.js": "^1.16.1",
     "puppeteer": "^4.0.1",
     "puppeteer-extra": "^3.1.9",
     "puppeteer-extra-plugin": "^3.1.4",

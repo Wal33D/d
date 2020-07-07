@@ -1,16 +1,16 @@
-window.addEventListener("DOMContentLoaded", () => {
 
-    const tuyaApi = require("./apis_js/tuyaApi.js");
-    const wolApi = require("./apis_js/wolApi.js");
-    const {
+window.addEventListener("DOMContentLoaded", () => {
+     const {
         runCmd,
         textTruncate
     } = require("./apis_js/jstools.js");
+
     const menuButton = document.getElementById("menu-btn");
     const minimizeButton = document.getElementById("minimize-btn");
     const maxUnmaxButton = document.getElementById("max-unmax-btn");
     const closeButton = document.getElementById("close-btn");
-  
+    const tuyaSettingsButton = document.getElementById("tuyaSettings-btn");
+
     menuButton.addEventListener("click", e => {
         window.openMenu(e.x, e.y);
     });
@@ -35,11 +35,19 @@ window.addEventListener("DOMContentLoaded", () => {
         window.closeWindow();
     });
 
-   tuyaApi.init();
-   wolApi.init();
 
+});
+ window.addEventListener('load', (event) => {
+        const tuyaApi = require("./apis_js/tuyaApi.js");
+    const wolApi = require("./apis_js/wolApi.js");
+    tuyaApi.init();
+    wolApi.init();
+        setInterval(function() {
+        tuyaApi.updateStatus();
+    }, 15000);
+    setInterval(function() {
+        wolApi.updateStatus();
+    }, 30000);
 
-setInterval(function(){tuyaApi.updateStatus(); }, 15000);
-setInterval(function(){wolApi.updateStatus(); }, 2000);
 
 });

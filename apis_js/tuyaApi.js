@@ -28,13 +28,14 @@ function toggleSwitch(deviceId, tokens, api, state) {
         thisSwitch.turnOn();
         for (var i = 0, row; row = table.rows[i]; i++) {
             row.cells[1].innerHTML = img_on;
-            state = "false";
+            state = false;
         }
     } else {
         thisSwitch.turnOff();
         for (var i = 0, row; row = table.rows[i]; i++) {
             row.cells[1].innerHTML = img_off;
-            state = "true";
+            state = true;
+
         }
     }
 }
@@ -49,41 +50,47 @@ function onOffButtonInit(data) {
     });
 }
 
+function getStateImg(device) {
+    var state = device.data.state
+    if (state == true) return img_on;
+    return img_off;
+}
+
 function createElement(device, token, api) {
-    var state = JSON.stringify(device.data.state)
+    var state = device.data.state
     var table = document.getElementById("tuyaDevices");
     var tr = document.createElement("tr");
     var name = document.createElement("td");
     var status = document.createElement("td");
+    var thisSwitch = createTuyaDevice(device.id, api)
 
     tr.appendChild(name);
     tr.appendChild(status);
     table.appendChild(tr);
 
     name.appendChild(document.createTextNode(textTruncate(device.name)));
-    status.appendChild(document.createTextNode(state));
-    if (state === "true") {
-        status.innerHTML = img_on;
-    } else {
-        status.innerHTML = img_off;
-    }
+    status.appendChild(document.createTextNode(" "));
+    status.innerHTML = img_off;
+    if (state == true) status.innerHTML = img_on;
 
     tr.addEventListener('click', function() {
-        var thisSwitch = new Light({
-            api: api,
-            deviceId: device.id
-        });
-        if (state === "true") {
+        if (state == true) {
             thisSwitch.turnOff();
             status.innerHTML = img_off;
-            state = "false";
+            state = false;
         } else {
             thisSwitch.turnOn();
             status.innerHTML = img_on;
-            state = "true"
+            state = true
         }
     });
-    return table;
+}
+
+function createTuyaDevice(id, api) {
+    return new Light({
+        api: api,
+        deviceId: id
+    });
 }
 
 async function init() {
@@ -108,10 +115,10 @@ module.exports = {
             sort(a, b);
         });
         var table = document.getElementById("tuyaDevices");
-        for (var i = table.rows.length-1; i > -1; i--) {
+        for (var i = table.rows.length - 1; i > -1; i--) {
             table.deleteRow(i);
         }
-       devices.forEach(element => createElement(element, token, api))
+        devices.forEach(element => createElement(element, token, api))
     }
 
 }

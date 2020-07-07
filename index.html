@@ -3,40 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <title>Glitch Automation</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://kit.fontawesome.com/1c9144b004.js" crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script>require('./style/1c9144b004.js');</script>
+    <script>require('bootstrap');</script>
+    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="./style/bootstrap.min.css" />
+    <link rel="stylesheet" href="./style/bootstrap-theme.min.css" />
   </head>
 </head>
-<body>
+<body id="body-content">
   <div id="menu-bar">
     <div class="left" role="menu">
-      <button class="menubar-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
+      <button class="menubar-btn" id="menu-btn"><img style="height:inherit; max-height:24px;"src="./assets/bars.svg"></img></button>
       <h5>Glitch Automation</h5>
     </div>
     <div class="right">
-      <button class="menubar-btn" id="minimize-btn"><i class="fas fa-window-minimize"></i></button>
-      <button class="menubar-btn" id="max-unmax-btn"><i class="far fa-square"></i></button>
-      <button class="menubar-btn" id="close-btn"><i class="fas fa-times"></i></button>
+      <button class="menubar-btn" id="minimize-btn"><img style="height:inherit; max-height:17px;"src="./assets/minimize.svg"></img></button>
+      <button class="menubar-btn" id="max-unmax-btn"><img style="height:inherit; max-height:17px;"src="./assets/maximize.svg"></img></button>
+      <button class="menubar-btn" id="close-btn"><img style="height:inherit; max-height:17px;"src="./assets/remove-symbol.svg"></img></button>
     </div>
   </div>
-  <div id ="main" class="container">
-    <div id="sidebar">
-      <div id ="devicePaneTuya" class="container">
+
+  <div id="main" class="container">
+    
+  <div id ="top-row" class="">
+    <div id="tuya">
+      <div id ="devicePaneTuya" class="">
         <table id="tuyaDevices">
-                    <p id="tuyaDevLoading">Loading Devices...</p>
+          <p id="tuyaDevLoading">Loading Devices...</p>
         </table>
       </div>
       <div id="tuyaButtonRow">
         <button id="tuyaOnAll">Turn On All</button>
         <button id="tuyaOffAll">Turn Off All</button>
+        <a id="tuyaSettings-btn" class="button" href="./tuyaSettings.html"><i class="fas fa-cog"></i></a>
       </div>
-            <div id ="devicePanePcs" class="container">
+    </div>
+    <div id="wol">
+      <div id ="devicePanePcs" class="">
         <table id="pcDevices">
           <p id="pcDevLoading">Scanning LAN...</p>
         </table>
@@ -47,6 +50,33 @@
       </div>
     </div>
   </div>
+  <div id ="bottom-row" class="">
+    <div id="tuya">
+      <div id ="devicePaneTuya" class="">
+        <table id="tuyaDevices">
+          <p id="tuyaDevLoading">Loading Devices...</p>
+        </table>
+      </div>
+      <div id="tuyaButtonRow">
+        <button id="tuyaOnAll">Turn On All</button>
+        <button id="tuyaOffAll">Turn Off All</button>
+        <a id="tuyaSettings-btn" class="button" href="./tuyaSettings.html"><i class="fas fa-cog"></i></a>
+      </div>
+    </div>
+        <div id="tuya">
+      <div id ="devicePaneTuya" class="">
+        <table id="tuyaDevices">
+          <p id="tuyaDevLoading">Loading Devices...</p>
+        </table>
+      </div>
+      <div id="tuyaButtonRow">
+        <button id="tuyaOnAll">Turn On All</button>
+        <button id="tuyaOffAll">Turn Off All</button>
+        <a id="tuyaSettings-btn" class="button" href="./tuyaSettings.html"><i class="fas fa-cog"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- You can also require other files to run in this process -->
   <script src="./renderer.js"></script>
 </body>
