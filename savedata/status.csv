@@ -10,9 +10,9 @@ IP Address,Computer Name,MAC Address,Network Adapter Company,User Text,Status,Wo
 192.168.1.11,,50-C7-BF-2B-41-62,"TP-LINK TECHNOLOGIES CO.,LTD.",,On,,,,,14
 192.168.1.12,,40-B4-CD-00-D6-53,Amazon Technologies Inc.,,On,,,,,16
 192.168.1.13,DESKTOP-LAJ00SR,00-28-F8-D2-A9-7E,Intel Corporate,,On,,,,,2
-192.168.1.15,,24-46-C8-A9-5D-25,"Motorola Mobility LLC, a Lenovo Company",,Off,,,,,4
+192.168.1.15,,24-46-C8-A9-5D-25,"Motorola Mobility LLC, a Lenovo Company",,On,,,,,4
 192.168.1.16,,24-46-C8-A9-65-8F,"Motorola Mobility LLC, a Lenovo Company",,On,,,,,5
 192.168.1.17,,48-A5-E7-39-D3-22,"Nintendo Co.,Ltd",,On,,,,,15
 192.168.1.18,,34-D2-70-CD-16-E8,Amazon Technologies Inc.,,On,,,,,17
-192.168.1.21,DESKTOP-HLNDP6P,84-16-F9-3A-71-95,"TP-LINK TECHNOLOGIES CO.,LTD.",,On,,,,,6
 192.168.1.22,,50-C7-BF-2B-51-25,"TP-LINK TECHNOLOGIES CO.,LTD.",,On,,,,,3
+192.168.1.29,DESKTOP-HLNDP6P,84-16-F9-3A-71-95,"TP-LINK TECHNOLOGIES CO.,LTD.",,On,,,,,6

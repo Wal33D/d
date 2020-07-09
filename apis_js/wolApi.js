@@ -13,7 +13,7 @@ class wolDevice {
         this.status = status || "null"
     }
 }
-async function updateStatus(waiting=false) {
+async function updateStatus(waiting = false) {
     const path = './savedata/status.csv'
     var devices = [];
     scanToCSV();
@@ -37,14 +37,14 @@ async function updateStatus(waiting=false) {
             devices.push(new wolDevice(name, ip, mac, status));
         }
     } catch (e) {}
-    setDeviceStatus(devices,waiting);
+    setDeviceStatus(devices, waiting);
     $('#pcDevLoading').hide();
     $('#pcDevices').fadeIn();
     return devices;
 }
 
 
-async function setDeviceStatus(devices,waiting=false) {
+async function setDeviceStatus(devices, waiting = false) {
     devices.sort(function(a, b) {
         sort(a, b);
     });
@@ -56,16 +56,16 @@ async function setDeviceStatus(devices,waiting=false) {
         var table = document.getElementById("pcDevices");
         var tr = document.createElement("tr");
         var pc_name = document.createElement("td");
-        var pc_ip = document.createElement("td");
         var state = document.createElement("td");
 
         tr.appendChild(pc_name);
-        tr.appendChild(pc_ip);
+
         tr.appendChild(state);
         table.appendChild(tr);
 
         pc_name.appendChild(document.createTextNode(textTruncate(wDevice.name)));
         state.appendChild(document.createTextNode(wDevice.status));
+        tr.setAttribute("id", wDevice.ip);
 
         if (wDevice.status == "null" || waiting) {
             state.innerHTML = '<img src=' + "./assets/null.png" + '></img>'
@@ -74,7 +74,28 @@ async function setDeviceStatus(devices,waiting=false) {
         } else if (wDevice.status == "On") {
             state.innerHTML = '<img src=' + "./assets/On.png" + '></img>'
         }
+        tr.addEventListener('click', function() {
+            alert(document.getElementById(this.id).children[1].innerHTML);
+            document.getElementById(this.id).children[1].innerHTML = '<img src=' + "./assets/null.png" + '></img>'
+             
+       if (document.getElementById(this.id).children[1].innerHTML == '<img src=' + "./assets/Off.png" + '></img>') {
+            state.innerHTML = '<img src=' + "./assets/Off.png" + '></img>'
+            runCmd("./savedata/WakeMeOnLan.exe /wakeup " + this.id);
+
+        } else if (document.getElementById(this.id).children[1].innerHTML == '<img src=' + "./assets/On.png" + '></img>') {
+            state.innerHTML = '<img src=' + "./assets/On.png" + '></img>'
+            runCmd('start ./savedata/psshutdown.exe \\\\' + this.id + ' -u Admin -p Aladdin1991!');
+
+        }
+    
+        });
+
     }
+
+
+
+
+
 }
 
 function getWolDevices(array) {

@@ -39,6 +39,12 @@ html {
 
 
 }
+p{
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding:60% 0;
+}
 #bottom-row{
 
 }
@@ -68,6 +74,7 @@ html {
 
 .container {
   height: calc(100vh - 30px);
+  width:100%!important;
   background: #34475ab0;
   color: white;
   display: flex;
@@ -99,7 +106,10 @@ button:hover {
 button i {
   color: white;
 }
+#tuya, #wol{
 
+  padding:2vh 8vw;
+}
 #tuyaButtonRow,
 #pcButtonRow {
   background: #34475ab0;
@@ -108,7 +118,6 @@ button i {
     width: 200px;
   max-width: 200px;
   border: 1px solid white;
-  padding: px;
   border-radius: 5px;
   box-shadow: 8px 10px 10px rgba(0, 0, 0, .35);
   font-size: 12px;
@@ -131,13 +140,17 @@ button i {
 }
 #devicePaneTuya,
 #devicePanePcs {
+  background: #34475a;
+    justify-content: center;
+  align-items: center;
+
   border: 1px solid white;
   padding: 4px;
   border-radius: 5px;
   box-shadow: inset 2px 5px 5px  2px rgba(0, 0, 0, .25);
   font-size: 12px;
 
-  height: calc(50vh - 70px);
+  height: calc(48vh - 110px);
   width: 200px;
   max-width: 200px;
   white-space: nowrap;
