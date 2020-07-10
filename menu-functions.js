@@ -14,14 +14,14 @@ function minimizeWindow(browserWindow = getCurrentWindow()) {
     browserWindow.minimize();
   }
 }
-/*
+
 function maximizeWindow(browserWindow = getCurrentWindow()) {
   if (browserWindow.maximizable) {
     // browserWindow.isMaximizable() for old electron versions
     browserWindow.maximize();
   }
 }
-*/
+
 function unmaximizeWindow(browserWindow = getCurrentWindow()) {
   browserWindow.unmaximize();
 }
@@ -46,7 +46,7 @@ module.exports = {
   getCurrentWindow,
   openMenu,
   minimizeWindow,
- // maximizeWindow,
+  maximizeWindow,
   unmaximizeWindow,
   maxUnmaxWindow,
   isWindowMaximized,

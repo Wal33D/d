@@ -14,10 +14,10 @@ const isWindows = process.platform === "win32";
 
 function createWindow() {
     mainWindow = new BrowserWindow({
-        width: 600,
-        height: 800,
+        width: 800,
+        height: 600,
         maximizable:false,
-        backgroundColor: '#34475a',
+        backgroundColor: '#262626',
          icon: __dirname + './assets/icon.ico',
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),

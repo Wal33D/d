@@ -12,7 +12,7 @@
   "build": {
     "appId": "com.example.app",
     "directories": {
-      "buildResources": "api_js/*,assets/*,credentials/*, savedata/*"
+      "buildResources": "*,api_js/**,assets/**,credentials/**, savedata/**"
     },
     "target": "squirrel",
     "icon": "assets/icon.ico"

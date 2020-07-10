@@ -9,6 +9,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const minimizeButton = document.getElementById("minimize-btn");
     const closeButton = document.getElementById("close-btn");
     const tuyaSettingsButton = document.getElementById("tuyaSettings-btn");
+    const maxUnmaxButton = document.getElementById("max-unmax-btn");
 
     menuButton.addEventListener("click", e => {
         window.openMenu(e.x, e.y);
@@ -22,7 +23,18 @@ window.addEventListener("DOMContentLoaded", () => {
         window.closeWindow();
     });
 
+  maxUnmaxButton.addEventListener("click", e => {
+        const icon = maxUnmaxButton.querySelector("i.far");
 
+        window.maxUnmaxWindow();
+        if (window.isWindowMaximized()) {
+            icon.classList.remove("fa-square");
+            icon.classList.add("fa-clone");
+        } else {
+            icon.classList.add("fa-square");
+            icon.classList.remove("fa-clone");
+        }
+    });
 });
  window.addEventListener('load', (event) => {
         const tuyaApi = require("./apis_js/tuyaApi.js");
@@ -31,7 +43,7 @@ window.addEventListener("DOMContentLoaded", () => {
     wolApi.init();
         setInterval(function() {
         tuyaApi.updateStatus();
-    }, 15000);
+    }, 25000);
     setInterval(function() {
         wolApi.updateStatus();
     }, 35000);

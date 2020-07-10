@@ -1,21 +1,33 @@
-
-@keyframes fadein{
-    0% { opacity:0; }
-    66% { opacity:0; }
-    100% { opacity:1; }
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-@-webkit-keyframes fadein{
-    0% { opacity:0; }
-    66% { opacity:0; }
-    100% { opacity:1; }
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
+
 html {
   opacity: 0;
--webkit-user-select: none;
-height: 100%;
-background: #34475a;
-    animation: 3s ease .5s normal forwards 1 fadein;
+  -webkit-user-select: none;
+  height: 100%;
+  background: #1c1c1c;
+  animation: 2s ease .5s normal forwards 1 fadein;
 }
 
 body {
@@ -23,37 +35,18 @@ body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white;
- 
 }
 
-html {
-  background: #34475a!important;
-}
-
-#top-row, #bottom-row{
+#main {
   width: 100%!important;
-    height: 50vh;
-  max-height: 300px;
-  justify-content: center;
-  align-items: center;
-
-
 }
-p{
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  padding:60% 0;
-}
-#bottom-row{
 
-}
 #menu-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 30px;
-  background: #34475a;
+  background: #1c1c1c;
   -webkit-app-region: drag;
 }
 
@@ -74,17 +67,12 @@ p{
 
 .container {
   height: calc(100vh - 30px);
-  width:100%!important;
-  background: #34475ab0;
+  background: #262626;
   color: white;
   display: flex;
   justify-content: center;
+  align-items: center;
   font-size: 2em;
-}
-
-#main{
-  padding-bottom:8px;
-  padding-top:8px;
 }
 
 button {
@@ -106,18 +94,28 @@ button:hover {
 button i {
   color: white;
 }
-#tuya, #wol{
 
-  padding:2vh 8vw;
+.background-ease {
+  -webkit-transition: background .4s linear;
+  -moz-transition: background .4s linear;
+  -o-transition: background .4s linear;
+  -ms-transition: background .4s linear;
+  transition: background .4s linear;
+  -webkit-transition: opacity .4s linear;
+  -moz-transition: opacity .4s linear;
+  -o-transition: opacity .4s linear;
+  -ms-transition: opacity .4s linear;
+  transition: opacity .4s linear;
 }
+
 #tuyaButtonRow,
 #pcButtonRow {
-  background: #34475ab0;
+  background: #262626;
   padding: 0px!important;
   height: 5vh;
-    width: 200px;
-  max-width: 200px;
+  width: 100%;
   border: 1px solid white;
+  padding: 8px;
   border-radius: 5px;
   box-shadow: 8px 10px 10px rgba(0, 0, 0, .35);
   font-size: 12px;
@@ -127,46 +125,36 @@ button i {
   justify-content: center;
 }
 
-#tuyaOnAll, #tuyaOffAll, #pcOnAll, #pcOffAll{
-  width: 42%;
-    padding:0;
+#tuyaButtonRow button,
+#pcButtonRow button {
+  width: 48.8%;
 }
 
-#tuyaSettings-btn{
-  padding:0;
-  margin:0;
-  width:12%;
-  color:inherit;
-}
 #devicePaneTuya,
 #devicePanePcs {
-  background: #34475a;
-    justify-content: center;
-  align-items: center;
-
   border: 1px solid white;
-  padding: 4px;
+  background: #262626!important;
+  background-color: #262626!important;
+  padding: 8px;
   border-radius: 5px;
-  box-shadow: inset 2px 5px 5px  2px rgba(0, 0, 0, .25);
+  box-shadow: 3px 5px 5px rgba(0, 0, 0, .25);
   font-size: 12px;
-
-  height: calc(48vh - 110px);
+  height: calc(49vh - 50px);
   width: 200px;
+  max-height: 500px;
   max-width: 200px;
   white-space: nowrap;
   overflow-y scroll;
   overflow-x: hidden;
 }
-
-
 /* Hide scrollbar for Chrome, Safari and Opera */
-
 #tuyaDevices,
 #pcDevices {
   padding: 150px;
   margin: auto;
+  margin-top: 0;
   display: none;
-  width: 100%
+  width: 200px;
 }
 
 #tuyaDevices img,
@@ -188,11 +176,10 @@ button i {
 }
 
 #sidebar {
-  background: #34475a;
-  padding: 10px 10px 10px 10px;
+  background: #1c1c1c;
+  padding: 2px 10px 10px 10px;
   height: calc(100vh - 30px);
   position: fixed;
   right: 0;
-  width: 100%;
+  max-width: 30vw;
 }
-
